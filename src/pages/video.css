@@ -24,9 +24,16 @@
     height: 90vh; /* Adjust the height as needed for mobile devices */
   }
   .Webcam-view {
-    width: 90vw;
+    width: 100vw;
   }
 }
+
+@media only screen and (min-device-width: 768px) {
+  .Webcam-view {
+    width: 100vw;
+  }
+}
+
 .record-button {
   padding: 10px 20px;
   background-color: #007bff;
