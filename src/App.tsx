@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Loader from './common/Loader';
 import MobileView from './pages/MobileView';
 import VideoModeScreen from './pages/VideoModeScreen';
+import ConsentView from './pages/ConsentView'
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -20,7 +21,9 @@ function App() {
       <Toaster position='top-right' reverseOrder={false} containerClassName='overflow-auto' />
 
       <Routes>
-        <Route path="/" element={<MobileView />} />
+        <Route path="/mobile" element={<MobileView />} />
+        <Route path="/" element={<ConsentView />} />
+
         <Route path="/video-mode" element={<VideoModeScreen />} />
 
       </Routes>

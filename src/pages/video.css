@@ -15,7 +15,7 @@
 }
 
 .Webcam-view {
-  width: 60vw;
+  width: 55vw;
 }
 
 /* Media query for responsive design */
@@ -28,7 +28,7 @@
   }
 }
 
-@media only screen and (min-device-width: 768px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .Webcam-view {
     width: 100vw;
   }

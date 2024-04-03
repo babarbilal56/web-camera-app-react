@@ -74,7 +74,11 @@ function VideoModeScreen() {
 
 
     }
-
+    const videoConstraints = {
+        width: 1280,
+        height: 720,
+        facingMode: "user", // or "environment" for the rear camera
+    };
 
     return (
         <>
@@ -84,6 +88,8 @@ function VideoModeScreen() {
                     <Webcam
                         ref={webcamRef}
                         className='Webcam-view'
+                        videoConstraints={videoConstraints}
+
                     />
                     {isRecording ? (
                         <button onClick={handleStopRecording} className="record-button" id="recordButton">Stop Recording</button>
@@ -98,6 +104,7 @@ function VideoModeScreen() {
                         controls
                         style={{ width: '50%', height: 'auto' }}
                         src={recordedVideoUrl}
+
                     />
 
                     <button onClick={() => retake()} className="record-button" id="recordButton">Retake</button>
