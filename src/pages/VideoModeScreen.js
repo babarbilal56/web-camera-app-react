@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Webcam from "react-webcam";
 import Header from '../components/Header';
 import './video.css'; // Import CSS file for styling
-
+import MainLayout from './MainLayout'
 function VideoModeScreen() {
     const webcamRef = useRef(null);
     const mediaRecorderRef = useRef(null);
@@ -81,8 +81,8 @@ function VideoModeScreen() {
     };
 
     return (
-        <>
-            <Header />
+        <MainLayout>
+
             {!recordedVideoUrl &&
                 <div className="webcam-container" style={{ backgroundColor: "#000000" }}>
                     <Webcam
@@ -113,7 +113,7 @@ function VideoModeScreen() {
 
                 </div>
             )}
-        </>
+        </MainLayout>
     );
 }
 

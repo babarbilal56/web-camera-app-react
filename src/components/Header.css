@@ -17,16 +17,12 @@
   visibility: visible;
 }
 .header {
-  padding: 30px 0;
-  background-color: #311432;
-  box-shadow: 3px 3px 3px #ccc;
-  z-index: 99;
-  /* position: fixed; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 20%;
+  flex-shrink: 0; /* Prevent header and footer from shrinking */
+  background-color: #333;
+  color: white;
+  padding: 10px;
 }
+
 .logo {
   color: #ffffff;
   font-size: 36px;
@@ -268,4 +264,34 @@
   .nav-list li.with-submenu .submenu li a::after {
     display: block;
   }
+}
+
+.side-modal {
+  position: fixed;
+  left: 10px;
+  bottom: 80px;
+  width: 260px;
+  height: 50%;
+  background-color: white;
+  padding: 20px;
+}
+
+.side-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.option-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 22%;
+}
+
+.option-button:hover {
+  background-color: #0056b3;
 }

@@ -1,0 +1,23 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  flex-shrink: 0; /* Prevent header and footer from shrinking */
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+.footer {
+  flex-shrink: 0; /* Prevent header and footer from shrinking */
+  background-color: #333;
+  color: white;
+  height: 9vh;
+}
+
+.content {
+  flex-grow: 1; /* Make content area grow to fill remaining space */
+  /* padding: 20px; */
+}

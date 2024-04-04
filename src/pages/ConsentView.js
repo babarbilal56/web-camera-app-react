@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import Header from './../components/Header'
+import { useNavigate } from 'react-router-dom';
+import './consent.css'; // Import CSS file for styling
+import MainLayout from './MainLayout'
 const ConsentView = ({ onConsent }) => {
-    const [consentGiven, setConsentGiven] = useState(false);
+    const navigate = useNavigate();
+    const [isShaking, setIsShaking] = useState(false);
 
+    const handleDeclineClick = () => {
+        setIsShaking(true);
+
+        // Reset shaking after 500ms
+        setTimeout(() => {
+            setIsShaking(false);
+        }, 500);
+    };
     const handleConsent = () => {
-        setConsentGiven(true);
         // Call the parent component's function to indicate consent has been given
-        onConsent();
+        navigate('/video-mode');
+
     };
 
     return (
-
-        <div>
+        <>
             <Header />
+
+
             <div className="bg-gray-100  flex flex-col  items-center px-4">
                 <div className="w-4/5 mt-20">
 
@@ -75,16 +88,15 @@ const ConsentView = ({ onConsent }) => {
 
                 </div>
                 <div className='flex flex-row justify-center '>
-                    <button className="px-8 py-3 mr-10  border border-blue-500 text-blue-500 rounded ">
+                    <button onClick={handleDeclineClick} className={`px-8 py-3 mr-10  border border-blue-500 text-blue-500 rounded ${isShaking ? "shake" : ""} `}>
                         Decline
                     </button>
-                    <button className="px-8 py-3 border  border-red text-white rounded " style={{ backgroundColor: "#50adec" }}>
+                    <button onClick={() => handleConsent()} className="px-8 py-3 border  border-red text-white rounded " style={{ backgroundColor: "#50adec" }}>
                         Agree
                     </button>
                 </div>
             </div>
-
-        </div>
+        </>
     );
 };
 
