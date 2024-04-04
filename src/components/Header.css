@@ -20,7 +20,7 @@
   flex-shrink: 0; /* Prevent header and footer from shrinking */
   background-color: #333;
   color: white;
-  padding: 10px;
+  height: 10vh;
 }
 
 .logo {
@@ -280,7 +280,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.option-button {
+/* .option-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -294,4 +294,11 @@
 
 .option-button:hover {
   background-color: #0056b3;
+} */
+
+.-top-full{
+  top: -300px !important;
+}
+.left-1\/2 {
+  left: 35% !important;
 }

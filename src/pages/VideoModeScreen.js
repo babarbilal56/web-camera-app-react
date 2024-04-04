@@ -89,6 +89,7 @@ function VideoModeScreen() {
                         ref={webcamRef}
                         className='Webcam-view'
                         videoConstraints={videoConstraints}
+                        
 
                     />
                     {isRecording ? (
@@ -101,6 +102,7 @@ function VideoModeScreen() {
             {recordedVideoUrl && (
                 <div className="webcam-container" style={{ backgroundColor: "#000000" }}>
                     <video
+                    
                         controls
                         style={{ width: '50%', height: 'auto' }}
                         src={recordedVideoUrl}

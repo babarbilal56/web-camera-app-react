@@ -22,3 +22,6 @@
 .shake {
   animation: shake 0.5s;
 }
+.content-consent {
+  height: 60vh;
+}

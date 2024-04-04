@@ -31,7 +31,7 @@ const ConsentView = ({ onConsent }) => {
 
                     <p className="text-2xl font-bold  mb-4">Consent and Data Policy</p>
                 </div>
-                <div className="overflow-y-auto w-4/5  mb-4" style={{ height: "33em" }}>
+                <div className="overflow-y-auto w-4/5 content-consent mb-4" >
 
                     <p className="text-lg mb-4">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut odio
