@@ -2,41 +2,43 @@ import { Popover, Transition } from "@headlessui/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./Header.css";
 import Modal from "react-modal"; // Assuming you're using react-modal library
-const solutions = [
-  {
-    name: "Insights",
-    description: "Measure actions your users take",
-    href: "##",
-    icon: IconOne,
-  },
-  {
-    name: "Automations",
-    description: "Create your own targeted content",
-    href: "##",
-    icon: IconTwo,
-  },
-  {
-    name: "Reports",
-    description: "Keep track of your growth",
-    href: "##",
-    icon: IconThree,
-  },
-];
+import { CiCamera } from "react-icons/ci";
+import { CiVideoOn } from "react-icons/ci";
+import { IoDocumentOutline } from "react-icons/io5";
+import { Switch } from '@headlessui/react'
+
 
 const Footer = () => {
+  const [enabled, setEnabled] = useState(false)
+
+  console.log(enabled, "enabled")
+  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedResolution, setSelectedResolution] = useState('');
+
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleSelectResolutionChange = (event) => {
+    setSelectedResolution(event.target.value);
+  };
+
+
+
   return (
     <div className="footer">
       <div>
-        <div className="top-16 w-full max-w-sm px-4 pt-2">
+        <div className="top-16 w-full max-w-sm px-4">
           <Popover className="relative">
             {({ open }) => (
               <>
-              
+
                 <Popover.Button
                   className={`
             ${open ? "text-white" : "text-white/90"}
-            px-16 py-3 border  border-red text-white rounded `}
-            style={{backgroundColor:"#50adec"}}
+             py-3 mt-5 border  border-red text-white rounded `}
+                  style={{ backgroundColor: "#53ade5", width: "15rem" }}
                 >
                   <span>Camera Opttions</span>
                 </Popover.Button>
@@ -52,46 +54,44 @@ const Footer = () => {
                   <Popover.Panel className="absolute w-60 z-10 mt-3 -top-full left-1/2 transform -translate-x-1/2 px-4 sm:px-0 lg:max-w-3xl">
                     <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                       <div className="relative grid gap-8 bg-white p-5 ">
-                    
+
                         <a
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
+
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
                               Video
                             </p>
+                            <CiVideoOn className="w-1/2" color="#000000" size={25} />
+
                           </div>
                         </a>
-                    
+
                         <a
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
+
                           <div className="ml-4">
                             <p className="text-sm font-medium text-black">
                               Photo
                             </p>
                           </div>
                         </a>
-                    
+
                         <a
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
+
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
                               Doc Scan
                             </p>
+                            <IoDocumentOutline className="w-1/2" color="#000000" size={25} />
+
                           </div>
                         </a>
 
@@ -99,15 +99,17 @@ const Footer = () => {
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
+
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
                               Flip Camera
                             </p>
+                            <CiCamera className="w-1/2" color="#000000" size={25} />
+
                           </div>
                         </a>
+
+
 
                         <a
                           href="#"
@@ -116,10 +118,51 @@ const Footer = () => {
                           {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
                             <IconOne aria-hidden="true" />
                           </div> */}
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
-                              Resolution
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
+                              Resolution:
                             </p>
+                            <div className="w-1/2 flex justify-center">
+
+                              <select
+                                value={selectedResolution}
+                                onChange={handleSelectResolutionChange}
+                                className="block w-full px-4 py-2 leading-tight  border border-gray-400 rounded-md appearance-none focus:outline-none focus:bg-white focus:border-gray-600"
+                                style={{ backgroundColor: "#53ade5" }}
+                              >
+                                <option value="">Select</option>
+                                <option value="option1">1024</option>
+                                <option value="option2">786</option>
+                                <option value="option3">90</option>
+                              </select>
+                            </div>
+                          </div>
+                        </a>
+
+
+                        <a
+                          href="#"
+                          className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+                        >
+
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
+                              Frame Rate:
+                            </p>
+                            <div className="w-1/2 flex justify-center">
+
+                              <select
+                                value={selectedOption}
+                                onChange={handleSelectChange}
+                                className="block w-full px-4 py-2 leading-tight  border border-gray-400 rounded-md appearance-none focus:outline-none focus:bg-white focus:border-gray-600"
+                                style={{ backgroundColor: "#53ade5" }}
+                              >
+                                <option value="">Select</option>
+                                <option value="option1">30</option>
+                                <option value="option2">60</option>
+                                <option value="option3">90</option>
+                              </select>
+                            </div>
                           </div>
                         </a>
 
@@ -127,14 +170,30 @@ const Footer = () => {
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
-                              Frame Rate 
+
+                          <div className="ml-4  w-full flex justify-center items-center " >
+                            <p className="text-sm font-medium text-black w-1/2">
+                              Pose Model:
                             </p>
+                            <div className="w-1/2 flex justify-center">
+                              <Switch
+                                checked={enabled}
+                                onChange={setEnabled}
+                                className={`${enabled ? 'bg-teal-900' : 'bg-teal-700'
+                                  } relative inline-flex h-[28px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+                                style={{ backgroundColor: "#53ade5" }}
+                              >
+                                <span className="sr-only ">Use setting</span>
+                                <span
+                                  aria-hidden="true"
+                                  className={`${enabled ? 'translate-x-9' : 'translate-x-0'
+                                    }  pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                                />
+                              </Switch>
+
+                            </div>
                           </div>
+
                         </a>
                       </div>
                     </div>
