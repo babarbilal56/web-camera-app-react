@@ -174,7 +174,7 @@ console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFra
               src={recordedVideoUrl}
             />
 
-            <div className="flex flex-row justify-center items-center">
+            <div className="record-button-view flex flex-row justify-center items-center">
               <button
                 onClick={() => retake()}
                 className="record-button mr-5"
