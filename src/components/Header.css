@@ -300,5 +300,18 @@
   top: -385px !important;
 }
 .left-1\/2 {
-  left: 34% !important;
+  left: 50% !important;
+}
+
+
+@media (max-width: 768px) {
+  .camera-opt-btn {
+    width: 12rem !important;
+  }
+
+}
+
+.active-cam-opt {
+  background-color: #52abe2;
+  color: #fff;
 }

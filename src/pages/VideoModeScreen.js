@@ -6,20 +6,44 @@ import MainLayout from "./MainLayout";
 import Footer from "../components/Footer";
 function VideoModeScreen() {
   const webcamRef = useRef(null);
+  const videoWrapperRef = useRef(null);
+
   const mediaRecorderRef = useRef(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [recordedVideoUrl, setRecordedVideoUrl] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
-  const [resolution, setResolution] = useState({ width: 640, height: 480 });
+  const [resolution, setResolution] = useState({ width: 1280, height: 720});
+  const [selectedFrameRate, setSelectedFrameRate] = useState(30); // Default frame rate
+  const [deviceId, setDeviceId] = useState(null);
+
 
   const handleResolutionChange = (event) => {
     const selectedResolution = JSON.parse(event.target.value);
     setResolution(selectedResolution);
   };
 
+  const handleFrameRate = (event) => {
+    setSelectedFrameRate(event.target.value);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const { offsetWidth } = videoWrapperRef.current;
+      webcamRef.current.video.width = offsetWidth;
+      webcamRef.current.video.height =
+        (offsetWidth * resolution.height) / resolution.width;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [resolution]);
+
   const resolutions = [
-    { value: { width: 640, height: 480 }, label: '640x480' },
-    { value: { width: 1280, height: 720 }, label: '1280x720' },
+    { value: { width: 640, height: 480 }, label: "640" },
+    { value: { width: 1280, height: 720 }, label: "1280" },
     // Add more resolutions as needed
   ];
 
@@ -78,42 +102,61 @@ function VideoModeScreen() {
     const recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
     console.log(recordedBlob, "Upload BLOB");
   };
-//   const videoConstraints = {
-//     width: 1280,
-//     height: 720,
-//     facingMode: "user", // or "environment" for the rear camera
-//   };
+  //   const videoConstraints = {
+  //     width: 1280,
+  //     height: 720,
+  //     facingMode: "user", // or "environment" for the rear camera
+  //   };
+
+  const handleSwitchCamera = () => {
+    alert("jasnd")
+    navigator.mediaDevices.enumerateDevices().then(devices => {
+      const videoDevices = devices.filter(device => device.kind === 'videoinput');
+      if (videoDevices.length > 1) {
+        const nextDeviceId = videoDevices.find(device => device.deviceId !== deviceId)?.deviceId || videoDevices[0].deviceId;
+        setDeviceId(nextDeviceId);
+      }
+    });
+  };
+
+console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFrameRate)
+
 
   return (
     <>
       <MainLayout>
         {!recordedVideoUrl && (
           <div
-            className="webcam-container"
-            style={{ backgroundColor: "#000000" }}
+            ref={videoWrapperRef}
+            className="flex flex-col justify-center items-center"
+            style={{ width: "100%", height: "80vh", backgroundColor:"#000000" }}
           >
             <Webcam
               ref={webcamRef}
+              width="100%"
+            //   height="auto"
               className="Webcam-view"
-              videoConstraints={resolution}
+              videoConstraints={{...resolution,frameRate:selectedFrameRate,deviceId:deviceId}}
             />
-            {isRecording ? (
-              <button
-                onClick={handleStopRecording}
-                className="record-button"
-                id="recordButton"
-              >
-                Stop Recording
-              </button>
-            ) : (
-              <button
-                onClick={handleStartRecording}
-                className="record-button"
-                id="recordButton"
-              >
-                Start Recording
-              </button>
-            )}
+            <div className="record-button-view">
+              {isRecording ? (
+                <button
+                  onClick={handleStopRecording}
+                  className="record-button"
+                  id="recordButton"
+                >
+                  Stop Recording
+                </button>
+              ) : (
+                <button
+                  onClick={handleStartRecording}
+                  className="record-button"
+                  id="recordButton"
+                >
+                  Start Recording
+                </button>
+              )}
+            </div>
           </div>
         )}
         {recordedVideoUrl && (
@@ -123,29 +166,40 @@ function VideoModeScreen() {
           >
             <video
               controls
-              style={{ width: "50%", height: "auto" }}
+              // style={{  width: "50%" ,
+              // height: "auto" }}
+              // className="render-video"
+              style={{ width: '50%', height: 'auto', maxWidth: '100%' }}
+
               src={recordedVideoUrl}
             />
 
-            <button
-              onClick={() => retake()}
-              className="record-button"
-              id="recordButton"
-            >
-              Retake
-            </button>
+            <div className="flex flex-row justify-center items-center">
+              <button
+                onClick={() => retake()}
+                className="record-button mr-5"
+                id="recordButton"
+              >
+                Retake
+              </button>
 
-            <button
-              onClick={uploadBlob}
-              className="record-button"
-              id="recordButton"
-            >
-              Upload
-            </button>
+              <button
+                onClick={uploadBlob}
+                className="record-button"
+                id="recordButton"
+              >
+                Upload
+              </button>
+            </div>
           </div>
         )}
-        <Footer   resolutions={resolutions}
-        onChangeResolution={handleResolutionChange}
+        <Footer
+          resolutions={resolutions}
+          onChangeResolution={handleResolutionChange}
+          onChangeFrameRate={handleFrameRate}
+          selectedFrameRate={selectedFrameRate}
+          selectedResolution={ JSON.stringify(resolution)}
+          handleSwitchCamera={handleSwitchCamera}
         />
       </MainLayout>
     </>

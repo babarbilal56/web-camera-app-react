@@ -6,39 +6,53 @@ import { CiCamera } from "react-icons/ci";
 import { CiVideoOn } from "react-icons/ci";
 import { IoDocumentOutline } from "react-icons/io5";
 import { Switch } from "@headlessui/react";
+import { MdOutlineFlipCameraIos } from "react-icons/md";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { AiFillCaretUp } from "react-icons/ai";
+import { AiFillCaretDown } from "react-icons/ai";
 
-const Footer = ({ resolutions, onChangeResolution }) => {
+const Footer = ({
+  resolutions,
+  onChangeResolution,
+  onChangeFrameRate,
+  selectedFrameRate,
+  selectedResolution,
+  handleSwitchCamera
+}) => {
   const [enabled, setEnabled] = useState(false);
 
   console.log(enabled, "enabled");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedResolution, setSelectedResolution] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
+  const togglePopover = () => {
+    setIsOpen(!isOpen);
   };
-
-  // const handleSelectResolutionChange = (event) => {
-  //   // setResolution({
-
-  //   // })
-  //   setSelectedResolution(event.target.value);
-  // };
-
   return (
     <div className="footer">
       <div>
-        <div className="top-16 w-full max-w-sm px-4">
+        <div className="top-16 w-full flex justify-around items-center max-w-sm px-4">
+          <div>
           <Popover className="relative">
             {({ open }) => (
               <>
                 <Popover.Button
+                            onClick={togglePopover}
+
                   className={`
             ${open ? "text-white" : "text-white/90"}
-             py-3 my-2  border  border-red text-white rounded `}
+            flex justify-evenly items-center  py-3 my-2  border  border-red text-white rounded camera-opt-btn `}
                   style={{ backgroundColor: "#53ade5", width: "15rem" }}
                 >
                   <span>Camera Opttions</span>
+
+                  {isOpen ? (
+             <AiFillCaretUp />
+
+            ) : (
+              <AiFillCaretDown />
+
+            )}
                 </Popover.Button>
 
                 <Transition
@@ -55,7 +69,7 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                       <div className="relative grid gap-8 bg-white p-5 ">
                         <a
                           href="#"
-                          className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+                          className=" active-cam-opt -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50 "
                         >
                           <div className="ml-4  w-full flex justify-center items-center ">
                             <p className="text-sm font-medium text-black w-1/2">
@@ -73,10 +87,15 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          <div className="ml-4">
-                            <p className="text-sm font-medium text-black">
+                          <div className="ml-4  w-full flex justify-center items-center ">
+                            <p className="text-sm font-medium text-black w-1/2">
                               Photo
                             </p>
+                            <CiCamera
+                              className="w-1/2"
+                              color="#000000"
+                              size={25}
+                            />
                           </div>
                         </a>
 
@@ -97,6 +116,7 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                         </a>
 
                         <a
+                        onClick={()=>handleSwitchCamera()}
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
@@ -104,7 +124,7 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                             <p className="text-sm font-medium text-black w-1/2">
                               Flip Camera
                             </p>
-                            <CiCamera
+                            <MdOutlineFlipCameraIos
                               className="w-1/2"
                               color="#000000"
                               size={25}
@@ -116,29 +136,25 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          {/* <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
-                            <IconOne aria-hidden="true" />
-                          </div> */}
+                        
                           <div className="ml-4  w-full flex justify-center items-center ">
                             <p className="text-sm font-medium text-black w-1/2">
                               Resolution:
                             </p>
                             <div className="w-1/2 flex justify-center">
-                              <select
-                                // value={selectedResolution}
+                          
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                className="h-8"
+                                sx={{backgroundColor:"#53ade5",color:"#fff"}}
+                                value={selectedResolution}
                                 onChange={onChangeResolution}
-                                className="block w-full px-4 py-2 leading-tight  border border-gray-400 rounded-md appearance-none focus:outline-none focus:bg-white focus:border-gray-600"
-                                style={{ backgroundColor: "#53ade5" }}
                               >
                                 {resolutions.map((res, index) => (
-                                  <option
-                                    key={index}
-                                    value={JSON.stringify(res.value)}
-                                  >
-                                    {res.label}
-                                  </option>
+                                  <MenuItem   value={JSON.stringify(res.value)} >{res.label}</MenuItem>
                                 ))}
-                              </select>
+                              </Select>
                             </div>
                           </div>
                         </a>
@@ -152,17 +168,21 @@ const Footer = ({ resolutions, onChangeResolution }) => {
                               Frame Rate:
                             </p>
                             <div className="w-1/2 flex justify-center">
-                              <select
-                                value={selectedOption}
-                                onChange={handleSelectChange}
-                                className="block w-full px-4 py-2 leading-tight  border border-gray-400 rounded-md appearance-none focus:outline-none focus:bg-white focus:border-gray-600"
-                                style={{ backgroundColor: "#53ade5" }}
+                      
+
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                className="h-8"
+                                sx={{backgroundColor:"#53ade5",color:"#fff"}}
+
+                                value={selectedFrameRate}
+                                onChange={onChangeFrameRate}
                               >
-                                <option value="">Select</option>
-                                <option value="option1">30</option>
-                                <option value="option2">60</option>
-                                <option value="option3">90</option>
-                              </select>
+                                <MenuItem value={30}>30</MenuItem>
+                                <MenuItem value={60}>60</MenuItem>
+                                <MenuItem value={90}>90</MenuItem>
+                              </Select>
                             </div>
                           </div>
                         </a>
@@ -202,89 +222,15 @@ const Footer = ({ resolutions, onChangeResolution }) => {
               </>
             )}
           </Popover>
+          </div>
+          <div>
+          <h1 className="text-center">Mode : Video</h1>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-function IconOne() {
-  return (
-    <svg
-      width="48"
-      height="48"
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-      <path
-        d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
-        stroke="#FB923C"
-        strokeWidth="2"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M16.7417 19.8094V28.1906L24 32.3812L31.2584 28.1906V19.8094L24 15.6188L16.7417 19.8094Z"
-        stroke="#FDBA74"
-        strokeWidth="2"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M20.7417 22.1196V25.882L24 27.7632L27.2584 25.882V22.1196L24 20.2384L20.7417 22.1196Z"
-        stroke="#FDBA74"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function IconTwo() {
-  return (
-    <svg
-      width="48"
-      height="48"
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-      <path
-        d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
-        stroke="#FB923C"
-        strokeWidth="2"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M18.804 30H29.1963L24.0001 21L18.804 30Z"
-        stroke="#FDBA74"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function IconThree() {
-  return (
-    <svg
-      width="48"
-      height="48"
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-      <rect x="13" y="32" width="2" height="4" fill="#FDBA74" />
-      <rect x="17" y="28" width="2" height="8" fill="#FDBA74" />
-      <rect x="21" y="24" width="2" height="12" fill="#FDBA74" />
-      <rect x="25" y="20" width="2" height="16" fill="#FDBA74" />
-      <rect x="29" y="16" width="2" height="20" fill="#FB923C" />
-      <rect x="33" y="12" width="2" height="24" fill="#FB923C" />
-    </svg>
-  );
-}
 
 export default Footer;
