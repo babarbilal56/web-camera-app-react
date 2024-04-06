@@ -39,7 +39,7 @@
     width: 100vw;
   }
   .webcam-container {
-    height: 85vh; /* Adjust the height as needed for mobile devices */
+    height: 80vh; /* Adjust the height as needed for mobile devices */
   }
 }
 
