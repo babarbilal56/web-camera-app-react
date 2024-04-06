@@ -109,7 +109,6 @@ function VideoModeScreen() {
   //   };
 
   const handleSwitchCamera = () => {
-    alert("jasnd")
     navigator.mediaDevices.enumerateDevices().then(devices => {
       const videoDevices = devices.filter(device => device.kind === 'videoinput');
       if (videoDevices.length > 1) {
