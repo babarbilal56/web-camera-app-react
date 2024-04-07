@@ -224,6 +224,7 @@ function VideoModeScreen() {
           selectedFrameRate={selectedFrameRate}
           selectedResolution={JSON.stringify(resolution)}
           handleSwitchCamera={handleSwitchCamera}
+          mode="Video"
         />
       </MainLayout>
     </>

@@ -6,6 +6,9 @@ import Loader from './common/Loader';
 import MobileView from './pages/MobileView';
 import VideoModeScreen from './pages/VideoModeScreen';
 import ConsentView from './pages/ConsentView'
+import PhotoModeScreen from './pages/PhotoModeScreen';
+import DocumentScanner from './pages/Test';
+
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -25,6 +28,10 @@ function App() {
         <Route path="/" element={<ConsentView />} />
 
         <Route path="/video-mode" element={<VideoModeScreen />} />
+        <Route path="/photo-mode" element={<PhotoModeScreen />} />
+        <Route path="/test" element={<DocumentScanner />} />
+
+
 
       </Routes>
     </>

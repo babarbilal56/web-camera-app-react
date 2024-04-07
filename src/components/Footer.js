@@ -11,6 +11,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { AiFillCaretUp } from "react-icons/ai";
 import { AiFillCaretDown } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 
 const Footer = ({
   resolutions,
@@ -18,9 +19,11 @@ const Footer = ({
   onChangeFrameRate,
   selectedFrameRate,
   selectedResolution,
-  handleSwitchCamera
+  handleSwitchCamera,
+  mode
 }) => {
   const [enabled, setEnabled] = useState(false);
+  const navigate = useNavigate();
 
   console.log(enabled, "enabled");
   const [isOpen, setIsOpen] = useState(false);
@@ -68,8 +71,9 @@ const Footer = ({
                     <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                       <div className="relative grid gap-8 bg-white p-5 ">
                         <a
+                        onClick={()=> navigate('/video-mode')}
                           href="#"
-                          className=" active-cam-opt -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50 "
+                          className={`${mode=="Video"? "active-cam-opt" :""}  -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50 `}
                         >
                           <div className="ml-4  w-full flex justify-center items-center ">
                             <p className="text-sm font-medium text-black w-1/2">
@@ -84,8 +88,10 @@ const Footer = ({
                         </a>
 
                         <a
+                                                onClick={()=> navigate('/photo-mode')}
+
                           href="#"
-                          className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+                          className={`${mode=="photo"? "active-cam-opt" :""} -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50`}
                         >
                           <div className="ml-4  w-full flex justify-center items-center ">
                             <p className="text-sm font-medium text-black w-1/2">
@@ -224,7 +230,7 @@ const Footer = ({
           </Popover>
           </div>
           <div>
-          <h1 className="text-center">Mode : Video</h1>
+          <h1 className="text-center">Mode : {(mode=="Video")?"Video":"Photo"} </h1>
           </div>
         </div>
       </div>
