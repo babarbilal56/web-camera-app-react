@@ -7,15 +7,15 @@ import Footer from "../components/Footer";
 function VideoModeScreen() {
   const webcamRef = useRef(null);
   const videoWrapperRef = useRef(null);
+  const [readyToTakePhoto, setReadyToTakePhoto] = useState(false);
 
   const mediaRecorderRef = useRef(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [recordedVideoUrl, setRecordedVideoUrl] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
-  const [resolution, setResolution] = useState({ width: 1280, height: 720});
+  const [resolution, setResolution] = useState({ width: 1280, height: 720 });
   const [selectedFrameRate, setSelectedFrameRate] = useState(30); // Default frame rate
   const [deviceId, setDeviceId] = useState(null);
-
 
   const handleResolutionChange = (event) => {
     const selectedResolution = JSON.parse(event.target.value);
@@ -109,17 +109,29 @@ function VideoModeScreen() {
   //   };
 
   const handleSwitchCamera = () => {
-    navigator.mediaDevices.enumerateDevices().then(devices => {
-      const videoDevices = devices.filter(device => device.kind === 'videoinput');
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      const videoDevices = devices.filter(
+        (device) => device.kind === "videoinput"
+      );
       if (videoDevices.length > 1) {
-        const nextDeviceId = videoDevices.find(device => device.deviceId !== deviceId)?.deviceId || videoDevices[0].deviceId;
+        const nextDeviceId =
+          videoDevices.find((device) => device.deviceId !== deviceId)
+            ?.deviceId || videoDevices[0].deviceId;
         setDeviceId(nextDeviceId);
       }
     });
   };
 
-console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFrameRate)
+  console.log(
+    { ...resolution, frameRate: selectedFrameRate },
+    "CHEKKKKKKK",
+    selectedFrameRate
+  );
 
+  const handleWebcamLoaded = () => {
+    setReadyToTakePhoto(true);
+  };
+  console.log("WORKIGN", readyToTakePhoto);
 
   return (
     <>
@@ -128,15 +140,29 @@ console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFra
           <div
             ref={videoWrapperRef}
             className="flex flex-col justify-center items-center"
-            style={{ width: "100%", height: "80vh", backgroundColor:"#000000" }}
+            style={{
+              width: "100%",
+              height: "80vh",
+              backgroundColor: "#000000",
+            }}
           >
+              <div className={readyToTakePhoto ?"ready-to-take-photo":"ready-to-take-photo-danger"}>
+                <p>Ready to take photo</p>
+              </div>
+        
             <Webcam
               ref={webcamRef}
               width="100%"
-            //   height="auto"
+              //   height="auto"
               className="Webcam-view"
-              videoConstraints={{...resolution,frameRate:selectedFrameRate,deviceId:deviceId}}
+              videoConstraints={{
+                ...resolution,
+                frameRate: selectedFrameRate,
+                deviceId: deviceId,
+              }}
+              onUserMedia={() => handleWebcamLoaded()}
             />
+
             <div className="record-button-view">
               {isRecording ? (
                 <button
@@ -168,8 +194,7 @@ console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFra
               // style={{  width: "50%" ,
               // height: "auto" }}
               // className="render-video"
-              style={{ width: '50%', height: 'auto', maxWidth: '100%' }}
-
+              style={{ width: "50%", height: "auto", maxWidth: "100%" }}
               src={recordedVideoUrl}
             />
 
@@ -197,7 +222,7 @@ console.log({...resolution,frameRate:selectedFrameRate},"CHEKKKKKKK",selectedFra
           onChangeResolution={handleResolutionChange}
           onChangeFrameRate={handleFrameRate}
           selectedFrameRate={selectedFrameRate}
-          selectedResolution={ JSON.stringify(resolution)}
+          selectedResolution={JSON.stringify(resolution)}
           handleSwitchCamera={handleSwitchCamera}
         />
       </MainLayout>

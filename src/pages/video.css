@@ -19,30 +19,6 @@
 
 
 
-/* Media query for responsive design */
-@media (max-width: 768px) {
-  .webcam-container {
-    height: 80vh; /* Adjust the height as needed for mobile devices */
-  }
-  .Webcam-view {
-    width: 100vw;
-  }
-   video {
-    max-width: 100%;
-    height: auto;
-    width: 80% !important;
-}
-}
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  .Webcam-view {
-    width: 100vw;
-  }
-  .webcam-container {
-    height: 80vh; /* Adjust the height as needed for mobile devices */
-  }
-}
-
 .record-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -62,4 +38,86 @@
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.ready-to-take-photo {
+  width: 20%;
+  background-color: white;
+  padding: 2px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: 10%;
+  color: green;
+}
+.ready-to-take-photo-danger{
+  width: 20%;
+  background-color: white;
+  padding: 2px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: 10%;
+  color: red;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+  .webcam-container {
+    height: 80vh; /* Adjust the height as needed for mobile devices */
+  }
+  .Webcam-view {
+    width: 100vw;
+  }
+  video {
+    max-width: 100%;
+    height: auto;
+    width: 80% !important;
+  }
+  .ready-to-take-photo {
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    color: green;
+  }
+  .ready-to-take-photo-danger{
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    color: green;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .Webcam-view {
+    width: 100vw;
+  }
+  .webcam-container {
+    height: 80vh; /* Adjust the height as needed for mobile devices */
+  }
+  .ready-to-take-photo {
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    color: green;
+  }
+
+  .ready-to-take-photo-danger{
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    color: red;
+  }
 }
