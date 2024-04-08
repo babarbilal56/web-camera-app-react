@@ -164,12 +164,12 @@ const Footer = ({
                             </div>
                           </div>
                         </a>
-
+                        {mode=="photo"?null: ( 
                         <a
                           href="#"
                           className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
                         >
-                          <div className="ml-4  w-full flex justify-center items-center ">
+                         <div className="ml-4  w-full flex justify-center items-center ">
                             <p className="text-sm font-medium text-black w-1/2">
                               Frame Rate:
                             </p>
@@ -191,7 +191,8 @@ const Footer = ({
                               </Select>
                             </div>
                           </div>
-                        </a>
+                       
+                        </a>)}
 
                         <a
                           href="#"
@@ -221,6 +222,17 @@ const Footer = ({
                             </div>
                           </div>
                         </a>
+
+                        {mode=="photo" && 
+                        <a
+                          href="#"
+                          className="h-5"
+                        >
+                        
+                         
+                       
+                        </a>}
+
                       </div>
                     </div>
                   </Popover.Panel>

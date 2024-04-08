@@ -53,7 +53,7 @@ function PhotoModeScreen() {
           setCapturedImage(blob);
         })
         .catch((error) => {
-          console.error('Error capturing image:', error);
+          console.error("Error capturing image:", error);
         });
     }
   };
@@ -62,11 +62,8 @@ function PhotoModeScreen() {
   };
 
   const uploadBlob = () => {
-
-
     console.log(capturedImage, "Upload BLOB");
   };
-
 
   const handleSwitchCamera = () => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -82,12 +79,9 @@ function PhotoModeScreen() {
     });
   };
 
-
-
   const handleWebcamLoaded = () => {
     setReadyToTakePhoto(true);
   };
-
 
   return (
     <>
@@ -128,15 +122,19 @@ function PhotoModeScreen() {
             />
 
             <div className="record-button-view">
-              {!capturedImage &&
-                <button
-                  onClick={captureImage}
-                  className="record-button"
-                  id="recordButton"
-                >
-                  Capture Image
+              {!capturedImage && (
+                // <button
+                //   onClick={captureImage}
+                //   className="record-button"
+                //   id="recordButton"
+                // >
+                //   Capture Image
+                // </button>
+
+                <button class="camera-button" onClick={captureImage}>
+                  <span class="camera-icon"></span>
                 </button>
-              }
+              )}
             </div>
           </div>
         )}
