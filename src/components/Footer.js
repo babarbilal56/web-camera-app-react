@@ -31,10 +31,14 @@ const Footer = ({
   const togglePopover = () => {
     setIsOpen(!isOpen);
   };
+
+
+
+
   return (
     <div className="footer">
       <div>
-        <div className="top-16 w-full flex justify-around items-center max-w-sm px-4">
+        <div className="top-16 w-full flex justify-around items-center max-w-sm">
           <div>
             <Popover className="relative">
               {({ open }) => (
@@ -86,7 +90,7 @@ const Footer = ({
                             onClick={() => navigate("/photo-mode")}
                             href="#"
                             className={`${
-                              mode == "photo" ? "active-cam-opt" : ""
+                              mode == "Photo" ? "active-cam-opt" : ""
                             } -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50`}
                           >
                             <div className="ml-4  w-full flex justify-center items-center ">
@@ -104,7 +108,9 @@ const Footer = ({
                           <a
                             onClick={() => navigate("/doc-mode")}
                             href="#"
-                            className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+                            className={`${
+                              mode == "Doc Scan" ? "active-cam-opt" : ""
+                            } -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50`}
                           >
                             <div className="ml-4  w-full flex justify-center items-center ">
                               <p className="text-sm font-medium text-black w-1/2">
@@ -164,7 +170,7 @@ const Footer = ({
                               </div>
                             </div>
                           </a>
-                          {mode == "photo" ? null : (
+                          {(mode == "Photo" || mode == "Doc Scan")  ? null : (
                             <a
                               href="#"
                               className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
@@ -225,7 +231,7 @@ const Footer = ({
                             </div>
                           </a>
 
-                          {mode == "photo" && <a href="#" className="h-5"></a>}
+                          {(mode == "Photo" || mode == "Doc Scan")  && <a href="#" className="h-5"></a>}
                         </div>
                       </div>
                     </Popover.Panel>
@@ -234,9 +240,9 @@ const Footer = ({
               )}
             </Popover>
           </div>
-          <div>
+          <div className="mode-des">
             <h1 className="text-center">
-              Mode : {mode == "Video" ? "Video" : "Photo"}{" "}
+              Mode : {mode}
             </h1>
           </div>
         </div>

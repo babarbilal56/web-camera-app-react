@@ -175,7 +175,7 @@ function PhotoModeScreen() {
           selectedFrameRate={selectedFrameRate}
           selectedResolution={JSON.stringify(resolution)}
           handleSwitchCamera={handleSwitchCamera}
-          mode="photo"
+          mode="Photo"
         />
       </MainLayout>
     </>

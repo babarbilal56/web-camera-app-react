@@ -165,7 +165,6 @@ function DocModeScreen() {
               className="Webcam-view"
               videoConstraints={{
                 ...resolution,
-                frameRate: selectedFrameRate,
                 deviceId: deviceId,
               }}
               onUserMedia={() => handleWebcamLoaded()}
@@ -225,7 +224,7 @@ function DocModeScreen() {
           selectedFrameRate={selectedFrameRate}
           selectedResolution={JSON.stringify(resolution)}
           handleSwitchCamera={handleSwitchCamera}
-          mode="photo"
+          mode="Doc Scan"
         />
       </MainLayout>
     </>
