@@ -100,6 +100,8 @@ export default function Scanner() {
 
       // You can use resultImage to display the scanned document
       // For example, append it to a container
+
+      
       document.getElementById('scannedDocument').appendChild(resultImage);
     };
     });
