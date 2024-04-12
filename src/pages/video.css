@@ -100,7 +100,7 @@
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .vertical-box {
-    width: 65% !important; /* Adjust the width for mobile devices */
+    width: 75% !important; /* Adjust the width for mobile devices */
   }
   .webcam-container {
     height: 80vh; /* Adjust the height as needed for mobile devices */
