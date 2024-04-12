@@ -179,6 +179,7 @@ function DocModeScreen() {
               }}
               onUserMedia={() => handleWebcamLoaded()}
             />
+      <GuidelineBox width="50%" height="50%" />
 
             <div className="record-button-view">
               {!capturedImage && (
@@ -242,3 +243,11 @@ function DocModeScreen() {
 }
 
 export default DocModeScreen;
+function GuidelineBox({ width, height }) {
+  return (
+    <div
+      className="vertical-box"
+      style={{ width: width, height: height }}
+    ></div>
+  );
+}
