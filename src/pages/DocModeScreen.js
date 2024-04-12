@@ -62,12 +62,22 @@ function DocModeScreen() {
   
       // Set the source of the image to the captured photo
       newImg.src = imageSrc;
-      const paperWidth = 500;
-      const paperHeight = 1000;
+      // const paperWidth = 500;
+      // const paperHeight = 1000;
       // Once the image is loaded, process it with jscanify
       newImg.onload = function () {
-        const resultCanvas = scanner.extractPaper(newImg, paperWidth, paperHeight);
-        const imageURL = resultCanvas.toDataURL();
+
+        const resultCanvas = document.createElement('canvas');
+           // Set the dimensions of the canvas to match the dimensions of the image
+      resultCanvas.width = newImg.width;
+      resultCanvas.height = newImg.height;
+   // Draw the image onto the canvas
+   const ctx = resultCanvas.getContext('2d');
+   ctx.drawImage(newImg, 0, 0);
+   const scannedCanvas = scanner.extractPaper(resultCanvas, newImg.width, newImg.height);
+
+        // const resultCanvas = scanner.extractPaper(newImg, paperWidth, paperHeight);
+        const imageURL = scannedCanvas.toDataURL();
 
         fetch(imageURL)
         .then((res) => res.blob())
