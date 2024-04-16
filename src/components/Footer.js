@@ -21,6 +21,8 @@ const Footer = ({
   selectedResolution,
   handleSwitchCamera,
   mode,
+  togglePoseDetection,
+  
 }) => {
   const [enabled, setEnabled] = useState(false);
   const navigate = useNavigate();
@@ -31,8 +33,12 @@ const Footer = ({
   const togglePopover = () => {
     setIsOpen(!isOpen);
   };
+const PoseDetectToggle=()=>{
+  setEnabled(!enabled)
+  togglePoseDetection()
 
 
+}
 
 
   return (
@@ -211,11 +217,11 @@ const Footer = ({
                               <div className="w-1/2 flex justify-center">
                                 <Switch
                                   checked={enabled}
-                                  onChange={setEnabled}
+                                  onChange={PoseDetectToggle}
                                   className={`${
                                     enabled ? "bg-teal-900" : "bg-teal-700"
                                   } relative inline-flex h-[28px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
-                                  style={{ backgroundColor: "#53ade5" }}
+                                  style={{ backgroundColor:enabled? "#53ade5":"#bdbebf" }}
                                 >
                                   <span className="sr-only ">Use setting</span>
                                   <span

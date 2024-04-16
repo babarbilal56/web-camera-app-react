@@ -6,7 +6,7 @@ import MobileView from './pages/MobileView';
 import VideoModeScreen from './pages/VideoModeScreen';
 import ConsentView from './pages/ConsentView'
 import PhotoModeScreen from './pages/PhotoModeScreen';
-import Scanner from './pages/Test';
+import PoseScreen from './pages/PoseDetect';
 import DocModeScreen from './pages/DocModeScreen';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         <Route path="/photo-mode" element={<PhotoModeScreen />} />
         <Route path="/doc-mode" element={<DocModeScreen />} />
 
-        <Route path="/test" element={<Scanner />} />
+        <Route path="/test" element={<PoseScreen />} />
 
 
 
