@@ -1,4 +1,4 @@
-# Mobile Camera development
+# Web Camera App
 
 ### TO GET STARTED:
 
