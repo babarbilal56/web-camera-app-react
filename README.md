@@ -13,6 +13,14 @@
     npm i
     ```
    This might take a bit, but it's for the libraries we will be using for this project.
+   
+   
+   2. run application:
+    ```bash
+    npm start
+    ```
+   This might take a bit, but it's for the libraries we will be using for this project.
+
 
 ### WHERE TO START
 
