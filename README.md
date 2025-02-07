@@ -4,7 +4,7 @@
 
 1. Run the following command in the terminal to clone the repo to your local machine:
     ```bash
-    git clone https://github.com/ehdevgit/camera_webapp.git
+    git clone https://github.com/babarbilal56/web-camera-app-react.git
     ```
    Make sure to run this in a new folder on your local machine.
 
