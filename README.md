@@ -1,4 +1,4 @@
-# Web Camera App
+# Web Camera Pose Detection App
 
 ### TO GET STARTED:
 
