@@ -1,5 +1,8 @@
 # Web Camera Pose Detection App
 
+This is a React.js-based Web Camera Pose Detection App that works seamlessly on both desktop and mobile views. The app utilizes advanced computer vision techniques to track and analyze human body poses in real time using the device's webcam.
+
+
 ### TO GET STARTED:
 
 1. Run the following command in the terminal to clone the repo to your local machine:
